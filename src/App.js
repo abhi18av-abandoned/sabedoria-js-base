@@ -90,7 +90,7 @@ export class App extends React.Component {
   };
 
   getABookData = async () => {
-    // https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books
+    // https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books/book-id
     const res = await axiosGet(
       `/bibles/${PORTUGUESE_BIBLE_ID}/books/${PORTUGUESE_BOOK_ID}`
     );
@@ -101,7 +101,7 @@ export class App extends React.Component {
 
   getAllBooksData = async () => {
     //https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books
-    const res = await axiosGet(`/bibles/${PORTUGUESE_BIBLE_ID}/books/`);
+    const res = await axiosGet(`/bibles/${PORTUGUESE_BIBLE_ID}/books`);
     this.setState({
       allBooksData: res.data.data
     });
@@ -119,7 +119,9 @@ export class App extends React.Component {
 
   getAllChaptersData = async () => {
     //https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books/LUK/chapters
-    const res = await axiosGet(`/bibles`);
+    const res = await axiosGet(
+      `/bibles/${PORTUGUESE_BIBLE_ID}/books/${PORTUGUESE_BOOK_ID}/chapters`
+    );
     this.setState({
       allChaptersData: res.data.data
     });
@@ -127,17 +129,31 @@ export class App extends React.Component {
 
   getAPassageData = async () => {
     //https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/passages/LUK.5.1
-    const res = await axiosGet(`/bibles/${PORTUGUESE_BIBLE_ID}`);
+    const res = await axiosGet(
+      `/bibles/${PORTUGUESE_BIBLE_ID}/passages/${PORTUGUESE_PASSAGE_ID}`
+    );
     this.setState({
       aPassageData: res.data.data
     });
   };
 
+  getASectionData = async () => {
+    //https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books/LUK/sections
+    const res = await axiosGet(
+      `/bibles/${PORTUGUESE_BIBLE_ID}/sections/${PORTUGUESE_SECTION_ID}`
+    );
+    this.setState({
+      aSectionData: res.data.data
+    });
+  };
+
   getAllSectionsData = async () => {
     //https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books/LUK/sections
-    const res = await axiosGet(`/bibles`);
+    const res = await axiosGet(
+      `/bibles/${PORTUGUESE_BIBLE_ID}/books/${PORTUGUESE_BOOK_ID}/sections`
+    );
     this.setState({
-      bibleData: res.data.data
+      allSectionsData: res.data.data
     });
   };
 
@@ -155,12 +171,10 @@ export class App extends React.Component {
 
   getAllVersesData = async () => {
     // https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/chapters/LUK.5/verses
-    const res = axiosGet(
+    const res = await axiosGet(
       `/bibles/${PORTUGUESE_BIBLE_ID}/chapters/${PORTUGUESE_CHAPTER_ID}/verses`
     );
-    await this.setState(() => {
-      return { allVersesData: res.data.data };
-    });
+    this.setState({ allVersesData: res.data.data });
   };
 
   componentDidMount() {
@@ -174,33 +188,48 @@ export class App extends React.Component {
       <>
         <div className="App">
           <button onClick={() => this.getAllBiblesData()}>All bibles</button>
-          {/* <div>{JSON.stringify(this.state.aVerseData.id)}</div> */}
+          <div>{JSON.stringify(this.state.allBiblesData)}</div>
+
           <button onClick={() => this.getABibleData()}>A bible</button>
-          {/* <div>{JSON.stringify(this.state.aVerseData.id)}</div> */}
+          <div>{JSON.stringify(this.state.aBibleData)}</div>
+
           <button onClick={() => this.getAllBooksData()}>All books</button>
-          {/* <div>{JSON.stringify(this.state.aVerseData.id)}</div> */}
+          <div>{JSON.stringify(this.state.allBooksData)}</div>
+
           <button onClick={() => this.getABookData()}>A book</button>
-          {/* <div>{JSON.stringify(this.state.aVerseData.id)}</div> */}
+          <div>{JSON.stringify(this.state.aBookData)}</div>
+
           <button onClick={() => this.getAllChaptersData()}>
             All chapters
           </button>
-          {/* <div>{JSON.stringify(this.state.aVerseData.id)}</div> */}
+          <div>{JSON.stringify(this.state.allChaptersData)}</div>
+
           <button onClick={() => this.getAChapterData()}>A chapter</button>
-          {/* <div>{JSON.stringify(this.state.aVerseData.id)}</div> */}
+          <div>{JSON.stringify(this.state.aChapterData)}</div>
+
           <button onClick={() => this.getAllChaptersData()}>
-            All passages
+            All chapters
           </button>
-          {/* <div>{JSON.stringify(this.state.aVerseData.id)}</div> */}
+          <div>{JSON.stringify(this.state.allChaptersData)}</div>
+
           <button onClick={() => this.getAPassageData()}>A passage</button>
-          {/* <div>{JSON.stringify(this.state.aVerseData.id)}</div> */}
+          <div>{JSON.stringify(this.state.aPassageData)}</div>
+
+          <button onClick={() => this.getASectionData()}>A section</button>
+          <div>{JSON.stringify(this.state.aSectionData)}</div>
+
           <button onClick={() => this.getAllSectionsData()}>
             All sections
           </button>
-          {/* <div>{JSON.stringify(this.state.aVerseData.id)}</div> */}
+          <div>{JSON.stringify(this.state.allSectionsData)}</div>
+
           <button onClick={() => this.getAllVersesData()}>All verses</button>
-          {/* <div>{JSON.stringify(this.state.aVerseData.id)}</div> */}
+          <div>{JSON.stringify(this.state.allVersesData)}</div>
+
           <button onClick={() => this.getAVerseData()}>A verse</button>
-          {this.state.aVerseData ? (
+          <div>{JSON.stringify(this.state.aVerseData)}</div>
+
+          {/* {this.state.aVerseData ? (
             <>
               <div
                 dangerouslySetInnerHTML={{
@@ -208,9 +237,7 @@ export class App extends React.Component {
                 }}
               ></div>
             </>
-          ) : null}
-
-          {/* <div>{JSON.stringify(this.state.allVersesData)}</div> */}
+          ) : null} */}
         </div>
       </>
     );

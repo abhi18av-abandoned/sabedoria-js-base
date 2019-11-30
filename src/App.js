@@ -60,6 +60,7 @@ export class App extends React.Component {
       aChapterData: null,
       allPassagesData: null,
       aPassageData: null,
+      aSectionData: null,
       allSectionsData: null,
       allVersesData: null,
       aVerseData: null
@@ -74,7 +75,7 @@ export class App extends React.Component {
   };
 
   getABibleData = async () => {
-    //api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01
+    // https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01
     const res = await axiosGet(`/bibles/${PORTUGUESE_BIBLE_ID}`);
     this.setState({
       aBibleData: res.data.data
@@ -82,7 +83,7 @@ export class App extends React.Component {
   };
 
   getAllBiblesData = async () => {
-    //  https://api.scripture.api.bible/v1/bibles
+    // https://api.scripture.api.bible/v1/bibles
     const res = await axiosGet(`/bibles`);
     this.setState({
       allBiblesData: res.data.data
@@ -90,7 +91,7 @@ export class App extends React.Component {
   };
 
   getABookData = async () => {
-    // https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books/book-id
+    // https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books/LUK
     const res = await axiosGet(
       `/bibles/${PORTUGUESE_BIBLE_ID}/books/${PORTUGUESE_BOOK_ID}`
     );
@@ -100,7 +101,7 @@ export class App extends React.Component {
   };
 
   getAllBooksData = async () => {
-    //https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books
+    // https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books
     const res = await axiosGet(`/bibles/${PORTUGUESE_BIBLE_ID}/books`);
     this.setState({
       allBooksData: res.data.data
@@ -108,9 +109,9 @@ export class App extends React.Component {
   };
 
   getAChapterData = async () => {
-    // https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books/LUK/chapters
+    // https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/chapters/LUK.5
     const res = await axiosGet(
-      `/bibles/${PORTUGUESE_BIBLE_ID}/books/${PORTUGUESE_BOOK_ID}/chapters/${PORTUGUESE_CHAPTER_ID}`
+      `/bibles/${PORTUGUESE_BIBLE_ID}/chapters/${PORTUGUESE_CHAPTER_ID}`
     );
     this.setState({
       aChapterData: res.data.data
@@ -118,7 +119,7 @@ export class App extends React.Component {
   };
 
   getAllChaptersData = async () => {
-    //https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books/LUK/chapters
+    // https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books/LUK/chapters
     const res = await axiosGet(
       `/bibles/${PORTUGUESE_BIBLE_ID}/books/${PORTUGUESE_BOOK_ID}/chapters`
     );
@@ -128,7 +129,7 @@ export class App extends React.Component {
   };
 
   getAPassageData = async () => {
-    //https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/passages/LUK.5.1
+    // https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/passages/LUK.5.1
     const res = await axiosGet(
       `/bibles/${PORTUGUESE_BIBLE_ID}/passages/${PORTUGUESE_PASSAGE_ID}`
     );
@@ -138,7 +139,7 @@ export class App extends React.Component {
   };
 
   getASectionData = async () => {
-    //https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books/LUK/sections
+    // https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/sections/LUK.S9
     const res = await axiosGet(
       `/bibles/${PORTUGUESE_BIBLE_ID}/sections/${PORTUGUESE_SECTION_ID}`
     );
@@ -148,7 +149,7 @@ export class App extends React.Component {
   };
 
   getAllSectionsData = async () => {
-    //https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books/LUK/sections
+    // https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books/LUK/sections
     const res = await axiosGet(
       `/bibles/${PORTUGUESE_BIBLE_ID}/books/${PORTUGUESE_BOOK_ID}/sections`
     );
@@ -158,7 +159,7 @@ export class App extends React.Component {
   };
 
   getAVerseData = async () => {
-    //https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/verses/LUK.5.2
+    // https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/verses/LUK.5.3
     const res = await axiosGet(
       `/bibles/${PORTUGUESE_BIBLE_ID}/verses/${PORTUGUESE_VERSE_ID}`
     );

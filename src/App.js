@@ -35,76 +35,6 @@ const axiosGet = axios.create({
     "api-key": AUTH_TOKEN
   }
 });
-
-// getABibleInfo = async () => {
-// https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01
-//   const res = await axiosGet(`/bibles/${PORTUGUESE_BIBLE_ID}`);
-//   this.setState({
-//     bibleData: res.data.data
-//   });
-// };
-
-// getAllBibleInfo = async () => {
-//  https://api.scripture.api.bible/v1/bibles
-//   const res = await axiosGet(`/bibles`);
-//   this.setState({
-//     bibleData: res.data.data
-//   });
-// };
-
-// getABookInfo = async () => {
-//   const res = await axiosGet(`/bibles/${PORTUGUESE_BIBLE_ID}`);
-//   this.setState({
-//     bibleData: res.data.data
-//   });
-// };
-
-// getAllBooksInfo = async () => {
-// https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books
-//   const res = await axiosGet(`/bibles`);
-//   this.setState({
-//     bibleData: res.data.data
-//   });
-// };
-
-// getAChapterInfo = async () => {
-//   const res = await axiosGet(`/bibles/${PORTUGUESE_BIBLE_ID}`);
-//   this.setState({
-//     bibleData: res.data.data
-//   });
-// };
-
-// getAllChaptersInfo = async () => {
-// https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books/LUK/chapters
-//   const res = await axiosGet(`/bibles`);
-//   this.setState({
-//     bibleData: res.data.data
-//   });
-// };
-
-// getAPassageInfo = async () => {
-// https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/passages/LUK.5.1
-//   const res = await axiosGet(`/bibles/${PORTUGUESE_BIBLE_ID}`);
-//   this.setState({
-//     bibleData: res.data.data
-//   });
-// };
-
-// getASectionInfo = async () => {
-//   const res = await axiosGet(`/bibles/${PORTUGUESE_BIBLE_ID}`);
-//   this.setState({
-//     bibleData: res.data.data
-//   });
-// };
-
-// getAllSectionsInfo = async () => {
-// https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books/LUK/sections
-//   const res = await axiosGet(`/bibles`);
-//   this.setState({
-//     bibleData: res.data.data
-//   });
-// };
-
 //=============================
 // components
 //=============================
@@ -122,14 +52,97 @@ export class App extends React.Component {
     super(props);
 
     this.state = {
-      // bibleData: null,
+      allBiblesData: null,
+      aBibleData: null,
+      allBooksData: null,
+      aBookData: null,
+      allChaptersData: null,
+      aChapterData: null,
+      allPassagesData: null,
+      aPassageData: null,
+      allSectionsData: null,
       allVersesData: null,
       aVerseData: null
     };
   }
 
-  getAVerseInfo = async () => {
-    //api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/verses/LUK.5.2
+  parseHtml = HTMLContent => {
+    // NOTE HTML parsing solutions for extrating or transforming fetched HTML into material design css
+    let parser = new DOMParser();
+    let doc = parser.parseFromString(HTMLContent, "text/html");
+    console.log(doc.body);
+  };
+
+  getABibleData = async () => {
+    //api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01
+    const res = await axiosGet(`/bibles/${PORTUGUESE_BIBLE_ID}`);
+    this.setState({
+      aBibleData: res.data.data
+    });
+  };
+
+  getAllBiblesData = async () => {
+    //  https://api.scripture.api.bible/v1/bibles
+    const res = await axiosGet(`/bibles`);
+    this.setState({
+      allBiblesData: res.data.data
+    });
+  };
+
+  getABookData = async () => {
+    // https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books
+    const res = await axiosGet(
+      `/bibles/${PORTUGUESE_BIBLE_ID}/books/${PORTUGUESE_BOOK_ID}`
+    );
+    this.setState({
+      aBookData: res.data.data
+    });
+  };
+
+  getAllBooksData = async () => {
+    //https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books
+    const res = await axiosGet(`/bibles/${PORTUGUESE_BIBLE_ID}/books/`);
+    this.setState({
+      allBooksData: res.data.data
+    });
+  };
+
+  getAChapterData = async () => {
+    // https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books/LUK/chapters
+    const res = await axiosGet(
+      `/bibles/${PORTUGUESE_BIBLE_ID}/books/${PORTUGUESE_BOOK_ID}/chapters/${PORTUGUESE_CHAPTER_ID}`
+    );
+    this.setState({
+      aChapterData: res.data.data
+    });
+  };
+
+  getAllChaptersData = async () => {
+    //https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books/LUK/chapters
+    const res = await axiosGet(`/bibles`);
+    this.setState({
+      allChaptersData: res.data.data
+    });
+  };
+
+  getAPassageData = async () => {
+    //https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/passages/LUK.5.1
+    const res = await axiosGet(`/bibles/${PORTUGUESE_BIBLE_ID}`);
+    this.setState({
+      aPassageData: res.data.data
+    });
+  };
+
+  getAllSectionsData = async () => {
+    //https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/books/LUK/sections
+    const res = await axiosGet(`/bibles`);
+    this.setState({
+      bibleData: res.data.data
+    });
+  };
+
+  getAVerseData = async () => {
+    //https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/verses/LUK.5.2
     const res = await axiosGet(
       `/bibles/${PORTUGUESE_BIBLE_ID}/verses/${PORTUGUESE_VERSE_ID}`
     );
@@ -137,18 +150,10 @@ export class App extends React.Component {
       aVerseData: res.data.data
     });
 
-    console.log(this.state.aVerseData.content);
-
-    // NOTE HTML parsing solutions for extrating or transforming fetched HTML into material design css
-    let parser = new DOMParser();
-    let doc = parser.parseFromString(
-      this.state.aVerseData.content,
-      "text/html"
-    );
-    console.log(doc.body);
+    // this.parseHtml(this.state.aVerseData.content);
   };
 
-  getAllVersesInfo = async () => {
+  getAllVersesData = async () => {
     // https://api.scripture.api.bible/v1/bibles/90799bb5b996fddc-01/chapters/LUK.5/verses
     const res = axiosGet(
       `/bibles/${PORTUGUESE_BIBLE_ID}/chapters/${PORTUGUESE_CHAPTER_ID}/verses`
@@ -159,19 +164,44 @@ export class App extends React.Component {
   };
 
   componentDidMount() {
-    // this.getAVerseInfo();
-    // this.getAllVersesInfo();
-    // this.getAllBibleInfo();
+    // this.getAVerseData();
+    // this.getAllVersesData();
+    // this.getAllBibleData();
   }
 
   render() {
     return (
       <>
         <div className="App">
-          <button onClick={() => this.getAVerseInfo()}>Verse of the day</button>
+          <button onClick={() => this.getAllBiblesData()}>All bibles</button>
+          {/* <div>{JSON.stringify(this.state.aVerseData.id)}</div> */}
+          <button onClick={() => this.getABibleData()}>A bible</button>
+          {/* <div>{JSON.stringify(this.state.aVerseData.id)}</div> */}
+          <button onClick={() => this.getAllBooksData()}>All books</button>
+          {/* <div>{JSON.stringify(this.state.aVerseData.id)}</div> */}
+          <button onClick={() => this.getABookData()}>A book</button>
+          {/* <div>{JSON.stringify(this.state.aVerseData.id)}</div> */}
+          <button onClick={() => this.getAllChaptersData()}>
+            All chapters
+          </button>
+          {/* <div>{JSON.stringify(this.state.aVerseData.id)}</div> */}
+          <button onClick={() => this.getAChapterData()}>A chapter</button>
+          {/* <div>{JSON.stringify(this.state.aVerseData.id)}</div> */}
+          <button onClick={() => this.getAllChaptersData()}>
+            All passages
+          </button>
+          {/* <div>{JSON.stringify(this.state.aVerseData.id)}</div> */}
+          <button onClick={() => this.getAPassageData()}>A passage</button>
+          {/* <div>{JSON.stringify(this.state.aVerseData.id)}</div> */}
+          <button onClick={() => this.getAllSectionsData()}>
+            All sections
+          </button>
+          {/* <div>{JSON.stringify(this.state.aVerseData.id)}</div> */}
+          <button onClick={() => this.getAllVersesData()}>All verses</button>
+          {/* <div>{JSON.stringify(this.state.aVerseData.id)}</div> */}
+          <button onClick={() => this.getAVerseData()}>A verse</button>
           {this.state.aVerseData ? (
             <>
-              {/* <div>{JSON.stringify(this.state.aVerseData.id)}</div> */}
               <div
                 dangerouslySetInnerHTML={{
                   __html: this.state.aVerseData.content

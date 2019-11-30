@@ -49,17 +49,7 @@
       <div key={_aSection.id}>{_aSection.title}</div>
     ))
   : null}
-<button onClick={() => this.getASectionData()}>A section</button>
-{/* <div>{JSON.stringify(this.state.aSectionData)}</div> */}
-{this.state.aSectionData ? (
-  <>
-    <div
-      dangerouslySetInnerHTML={{
-        __html: this.state.aSectionData.content
-      }}
-    ></div>
-  </>
-) : null}
+
 <button onClick={() => this.getAllVersesData()}>All verses</button>
 {/* <div>{JSON.stringify(this.state.allVersesData)}</div> */}
 {this.state.allVersesData

@@ -1,33 +1,21 @@
 import React from "react";
-import { axiosGet } from "../bibleApi";
 
 export class ASection extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      aSectionData: this.props.aSectionData
-    };
-  }
-
-  getaSectionData = async () => {
-    // https://api.scripture.api.bible/v1/bibles
-    const res = await axiosGet(`/bibles`);
-    this.setState({
-      aSectionData: res.data.data
-    });
-  };
-
   render() {
+    const { getASectionData, sectionId } = this.props;
     return (
       <>
-        <button onClick={() => this.getaSectionData()}>All bibles</button>
+        <button onClick={() => getASectionData(sectionId)}>A section</button>
         {/* <div>{JSON.stringify(this.state.aSectionData)}</div> */}
-        {this.state.aSectionData
-          ? this.state.aSectionData.map(_aBible => (
-              <div key={_aBible.id}>{_aBible.name}</div>
-            ))
-          : null}
+        {this.props.aSectionData ? (
+          <>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: this.props.aSectionData.content
+              }}
+            ></div>
+          </>
+        ) : null}
       </>
     );
   }

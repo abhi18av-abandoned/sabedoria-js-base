@@ -1,12 +1,12 @@
 import axios from "axios";
 import { AUTH_TOKEN } from "./secrets";
 
-const PORTUGUESE_BIBLE_ID = "90799bb5b996fddc-01";
-const PORTUGUESE_BOOK_ID = "LUK";
-const PORTUGUESE_CHAPTER_ID = "LUK.5";
-const PORTUGUESE_PASSAGE_ID = "LUK.5.1";
-const PORTUGUESE_SECTION_ID = "LUK.S9";
-const PORTUGUESE_VERSE_ID = "LUK.5.3";
+export const PORTUGUESE_BIBLE_ID = "90799bb5b996fddc-01";
+export const PORTUGUESE_BOOK_ID = "LUK";
+export const PORTUGUESE_CHAPTER_ID = "LUK.5";
+export const PORTUGUESE_PASSAGE_ID = "LUK.5.1";
+export const PORTUGUESE_SECTION_ID = "LUK.S9";
+export const PORTUGUESE_VERSE_ID = "LUK.5.3";
 
 export const axiosGet = axios.create({
   baseURL: "https://api.scripture.api.bible/v1",
